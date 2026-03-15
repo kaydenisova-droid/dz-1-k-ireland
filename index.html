@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Photography | Memories Captured Beautifully</title>
+    <!-- Google Fonts: Playfair Display for Serif Elegance, Montserrat for Clean Sans-Serif -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #1a1a1a;
+            --white: #ffffff;
+            --gray: #f9f9f9;
+            --accent: #d4af37; /* Subtle Gold for a high-end feel */
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-weight: 300;
+            color: #555;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 1000;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo-container h1 {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .logo-container span {
+            font-size: 0.6rem;
+            display: block;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--black);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            background: white;
+            padding: 60px;
+            max-width: 800px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero-content h2 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: var(--black);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: var(--transition);
+            border: 1px solid var(--black);
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--black);
+        }
+
+        /* Portfolio Grid */
+        .section-title {
+            text-align: center;
+            padding: 100px 0 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 0 50px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            background-color: #eee;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: var(--transition);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Featured Product Section: Nature Cards */
+        .featured-product {
+            background: var(--gray);
+            margin-top: 100px;
+            display: flex;
+            align-items: center;
+            padding: 100px 50px;
+        }
+
+        .product-image {
+            flex: 1;
+            padding-right: 50px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .product-image img {
+            width: 100%;
+            max-width: 550px;
+            display: block;
+            box-shadow: 20px 20px 0px var(--accent);
+            background-color: #fff;
+        }
+
+        .product-info {
+            flex: 1;
+            padding-left: 50px;
+        }
+
+        .product-info h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 100px 50px;
+            text-align: center;
+            background: var(--white);
+        }
+
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .secondary-cta {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--black);
+            border: 1px solid #ccc;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--black);
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 992px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .featured-product {
+                flex-direction: column;
+                text-align: center;
+                padding: 60px 20px;
+            }
+            .product-image {
+                padding-right: 0;
+                margin-bottom: 50px;
+                justify-content: center;
+            }
+            .product-info {
+                padding-left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px;
+                flex-direction: column;
+            }
+            nav ul {
+                margin-top: 20px;
+            }
+            nav ul li {
+                margin: 0 10px;
+            }
+            .hero-content {
+                padding: 40px 20px;
+            }
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+            .portfolio-item {
+                height: 400px;
+            }
+            .secondary-cta {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-container">
+            <h1>Family Photography</h1>
+            <span>Memories Captured Beautifully</span>
+        </div>
+        <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#featured">Boutique</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-content">
+            <p style="text-transform: uppercase; letter-spacing: 5px; font-size: 0.7rem; margin-bottom: 20px;">The Editorial Collection</p>
+            <h2>Capture the Moment</h2>
+            <p>High-end photography for families who value timeless elegance and authentic connection.</p>
+            <a href="#contact" class="cta-button">Schedule a Photoshoot</a>
+        </div>
+    </section>
+
+    <div id="services" class="section-title">
+        <p>Our Specializations</p>
+        <h2>The Collection</h2>
+    </div>
+
+    <section class="portfolio-grid">
+        <!-- Family -->
+        <div class="portfolio-item">
+            <img src="https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?auto=format&fit=crop&w=800&q=80" alt="Family Photography">
+            <div class="portfolio-overlay">
+                <h3>Family</h3>
+                <p>Natural connections in beautiful light.</p>
+            </div>
+        </div>
+
+        <!-- Portrait -->
+        <div class="portfolio-item">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" alt="Portrait Photography">
+            <div class="portfolio-overlay">
+                <h3>Portrait</h3>
+                <p>Sophisticated editorial headshots and styling.</p>
+            </div>
+        </div>
+
+        <!-- Newborn -->
+        <div class="portfolio-item">
+            <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=800&q=80" alt="Newborn Photography">
+            <div class="portfolio-overlay">
+                <h3>Newborn</h3>
+                <p>Gentle, minimalist captures of new life.</p>
+            </div>
+        </div>
+
+        <!-- Social Media -->
+        <div class="portfolio-item">
+            <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=800&q=80" alt="Social Media Content">
+            <div class="portfolio-overlay">
+                <h3>Social Media</h3>
+                <p>Aesthetic content for your digital presence.</p>
+            </div>
+        </div>
+
+        <!-- Special Occasion -->
+        <div class="portfolio-item">
+            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80" alt="Special Occasion Events">
+            <div class="portfolio-overlay">
+                <h3>Special Occasion</h3>
+                <p>Celebrating life's greatest milestones.</p>
+            </div>
+        </div>
+
+        <!-- Scenic Section - High Resolution Landscape Art -->
+        <div class="portfolio-item">
+            <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80" alt="Scenic Landscape Art">
+            <div class="portfolio-overlay">
+                <h3>Scenic</h3>
+                <p>Landscape art and outdoor sessions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Boutique Section: Unique Nature Card Collections -->
+    <section id="featured" class="featured-product">
+        <div class="product-image">
+            <!-- Functional high-res scenic image that represents the Nature Beauty Cards -->
+            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80" alt="Unique Nature Cards Collection">
+        </div>
+        <div class="product-info">
+            <span class="badge">Boutique Exclusive</span>
+            <h3>Nature Beauty Cards</h3>
+            <p>Our unique blank cards capture the breathtaking scenic landscape art seen in our outdoor sessions. Give your personal touch to any occasion or thank you note with these museum-grade cardstock pieces that celebrate local natural beauty.</p>
+            <a href="#" class="cta-button">Shop the Collection</a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-container">
+            <h2>Let's Collaborate</h2>
+            <p>Every story is unique. We are here to capture yours with the sophistication and care it deserves.</p>
+            <div class="secondary-cta">
+                <a href="mailto:hello@familyphotography.us" class="cta-button">Schedule Photoshoot</a>
+                <a href="#" class="cta-button btn-outline">Discuss Custom Project</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Family Photography. All Rights Reserved.</p>
+        <p style="margin-top: 10px; font-style: italic; letter-spacing: 1px;">Memories Captured Beautifully</p>
+    </footer>
+
+</body>
+</html>
